@@ -8,7 +8,7 @@
 !/config/opencloud/apps/maps
 
 # exclude custom compose files
-/custom
+# /custom
 
 # exclude certificates
 /certs/*
