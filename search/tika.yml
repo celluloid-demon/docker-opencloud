@@ -8,7 +8,8 @@ services:
     # release notes: https://tika.apache.org
     networks:
       opencloud-net:
-    restart: always
+  # restart: always           # [REMOVED]
+    restart: unless-stopped   # [ADDED]
     logging:
       driver: ${LOG_DRIVER:-local}
 

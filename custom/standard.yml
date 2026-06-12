@@ -1,1 +1,10 @@
-
+---
+services:
+  opencloud:
+    volumes:
+      # - ./config/opencloud/csp.yaml:/etc/opencloud/csp.yaml
+      # - ./config/opencloud/banned-password-list.txt:/etc/opencloud/banned-password-list.txt
+      # configure the .env file to use own paths instead of docker internal volumes
+      - ${VOLUMES}/config}:/etc/opencloud
+      - ${VOLUMES}/data}:/var/lib/opencloud
+      - ${VOLUMES}/apps}:/var/lib/opencloud/web/assets/apps

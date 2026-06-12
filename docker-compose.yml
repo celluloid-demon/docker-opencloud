@@ -27,10 +27,10 @@ services:
       OC_INSECURE: "${INSECURE:-false}"
       # basic auth (not recommended, but needed for eg. WebDav clients that do not support OpenID Connect)
       PROXY_ENABLE_BASIC_AUTH: "${PROXY_ENABLE_BASIC_AUTH:-false}"
-      # demo users
+      # demo users# <--- REMOVED --->
       IDM_CREATE_DEMO_USERS: "${DEMO_USERS:-false}"
       # admin password
-      IDM_ADMIN_PASSWORD: "${INITIAL_ADMIN_PASSWORD}"
+      # IDM_ADMIN_PASSWORD: "${INITIAL_ADMIN_PASSWORD}"   # [REMOVED]
       # email server (if configured)
       NOTIFICATIONS_SMTP_HOST: "${SMTP_HOST}"
       NOTIFICATIONS_SMTP_PORT: "${SMTP_PORT}"
@@ -54,20 +54,31 @@ services:
       OC_PASSWORD_POLICY_MIN_UPPERCASE_CHARACTERS: "${OC_PASSWORD_POLICY_MIN_UPPERCASE_CHARACTERS:-1}"
       OC_PASSWORD_POLICY_MIN_DIGITS: "${OC_PASSWORD_POLICY_MIN_DIGITS:-1}"
       OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS: "${OC_PASSWORD_POLICY_MIN_SPECIAL_CHARACTERS:-1}"
-    volumes:
-      - ./config/opencloud/csp.yaml:/etc/opencloud/csp.yaml
-      - ./config/opencloud/banned-password-list.txt:/etc/opencloud/banned-password-list.txt
-      # configure the .env file to use own paths instead of docker internal volumes
-      - ${OC_CONFIG_DIR:-opencloud-config}:/etc/opencloud
-      - ${OC_DATA_DIR:-opencloud-data}:/var/lib/opencloud
-      - ${OC_APPS_DIR:-./config/opencloud/apps}:/var/lib/opencloud/web/assets/apps
+
+    # <--- REMOVED --->
+
+    # volumes:
+    #   - ./config/opencloud/csp.yaml:/etc/opencloud/csp.yaml
+    #   - ./config/opencloud/banned-password-list.txt:/etc/opencloud/banned-password-list.txt
+    #   # configure the .env file to use own paths instead of docker internal volumes
+    #   - ${OC_CONFIG_DIR:-opencloud-config}:/etc/opencloud
+    #   - ${OC_DATA_DIR:-opencloud-data}:/var/lib/opencloud
+    #   - ${OC_APPS_DIR:-./config/opencloud/apps}:/var/lib/opencloud/web/assets/apps
+
+    # <--- /REMOVED --->
+
     logging:
       driver: ${LOG_DRIVER:-local}
-    restart: always
+  # restart: always           # [REMOVED]
+    restart: unless-stopped   # [ADDED]
 
-volumes:
-  opencloud-config:
-  opencloud-data:
+# <--- REMOVED --->
+
+# volumes:
+#   opencloud-config:
+#   opencloud-data:
+
+# <--- /REMOVED --->
 
 networks:
   opencloud-net:
